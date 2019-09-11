@@ -1,11 +1,11 @@
-### This is my study repo
+### This is my study path
 
 Repos so far:
 
 
-* [Hello World repo](https://github.com/Elaiden/hello-world)
-* [Patchwork repo](https://github.com/Elaiden/patchwork)
-* [Git Lesson repo](https://github.com/Elaiden/git-lesson-repository)
+* [Hello World](https://github.com/Elaiden/hello-world)
+* [Patchwork](https://github.com/Elaiden/patchwork)
+* [Git Lesson](https://github.com/Elaiden/git-lesson-repository)
 
 
 ---
