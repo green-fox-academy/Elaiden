@@ -23,7 +23,7 @@ public class VariableMutation {
         System.out.println("d: " + d);
 
         int e = 8;
-        e = (int)Math.pow(e, 3);
+        e = (int) Math.pow(e, 3);
 
         System.out.println("e: " + e);
 
