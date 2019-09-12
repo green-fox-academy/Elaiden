@@ -14,6 +14,6 @@ public class AnimalsAndLegs {
         int pigLegs = amountPigs * 4;
         int totalLegs = chickenLegs + pigLegs;
         System.out.println("The " + amountChicken + " chicken(s) and the " + amountPigs + " pig(s) have " + totalLegs + " legs.");
-        
+
     }
 }
