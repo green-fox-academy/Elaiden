@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class OddEven {
@@ -6,7 +7,7 @@ public class OddEven {
 
         Scanner numberScan = new Scanner(System.in);
 
-        System.out.println("Please give me a number (integer), so I can tell if it's even or odd.");
+        System.out.println("Please give me an integer, so I can tell if it's even or odd.");
         int number = numberScan.nextInt();
         if (number == 0 || (number % 2 == 0)) {
             System.out.println("Even");
