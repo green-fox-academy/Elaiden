@@ -9,6 +9,6 @@ public class PrintEven {
                 System.out.println(i);
             }
         }
-        
+
     }
 }
