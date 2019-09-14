@@ -11,12 +11,12 @@ public class GuessTheNumber {
 
     do {
       userTry = input.nextInt();
-      if (userTry > mysteryNumber){
+      if (userTry > mysteryNumber) {
         System.out.println("The stored number is lower");
       } else if (userTry < mysteryNumber) {
         System.out.println("The stored number is higher");
       }
-    } while ( userTry != mysteryNumber);
+    } while (userTry != mysteryNumber);
     System.out.println("You found the number: " + mysteryNumber);
   }
 }
