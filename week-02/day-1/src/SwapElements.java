@@ -9,12 +9,13 @@ public class SwapElements {
     String[] abc = {"first", "second", "third"};
     String[] swappedAbc = arrayElementSwap(abc);
 
-    for (String words: swappedAbc) {
+    for (String words : swappedAbc) {
       System.out.println(words);
     }
 
   }
-  public static String[] arrayElementSwap (String[] target) {
+
+  public static String[] arrayElementSwap(String[] target) {
     String buffer = target[0];
     target[0] = target[2];
     target[2] = buffer;
