@@ -26,7 +26,7 @@ public class CenterBoxFunction {
     for (int i = 0; i < 3; i++) {
       int randomNumber = random.nextInt(255);
       graphics.setColor(new Color(randomNumber, randomNumber, randomNumber));
-      graphics.drawRect(WIDTH - (size / 2), HEIGHT - (size / 2), size, size);
+      graphics.drawRect((WIDTH / 2) - (size / 2), (HEIGHT / 2) - (size / 2), size, size);
       size = size + randomNumber;
     }
   }
