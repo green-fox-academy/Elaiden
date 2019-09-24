@@ -4,10 +4,10 @@ public class DivideByZero {
 
     int numberAsDivider = 0;
 
-    System.out.println(divideTen(numberAsDivider));
+    divideTen(numberAsDivider);
   }
 
-  public static int divideTen(int divider) {
+  public static void divideTen(int divider) {
     int numberToDivide = 10;
     int result = 0;
     try {
@@ -17,6 +17,6 @@ public class DivideByZero {
     } catch (Exception valami) {
       System.out.println("Valami mas hiba torpent.");
     }
-    return result;
+    System.out.println(result);
   }
 }
