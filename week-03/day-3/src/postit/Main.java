@@ -9,6 +9,6 @@ public class Main {
     PostIt firstPost = new PostIt(Color.ORANGE, "Idea 1", Color.BLUE);
     PostIt secondPost = new PostIt(Color.PINK, "Awesome", Color.BLACK);
     PostIt thirdPost = new PostIt(Color.YELLOW, "Superb!", Color.GREEN);
-    
+
   }
 }
