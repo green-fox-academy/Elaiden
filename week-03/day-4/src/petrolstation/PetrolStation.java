@@ -17,7 +17,18 @@ public class PetrolStation {
 
     Station newStation = new Station();
     Car randomCar = new Car();
+    Car anotherCar = new Car();
+    Car thirdCar = new Car();
+    Car fourthCar = new Car();
+    Car fifthCar = new Car();
+    Car loser = new Car();
 
     newStation.refill(randomCar);
+    newStation.refill(anotherCar);
+    newStation.refill(thirdCar);
+    newStation.refill(fourthCar);
+    newStation.refill(fifthCar);
+    newStation.refill(loser);
+
   }
 }
