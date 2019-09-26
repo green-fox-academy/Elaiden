@@ -1,4 +1,4 @@
-package Dominoes;
+package dominoes;
 
 
 public class Domino {
