@@ -23,18 +23,24 @@ public class Pirate {
   }
 
   public void drinkSomeRum() {
-    if (this.pirateAlive) {
+    if (this.pirateAlive && !this.piratePassedOut) {
       this.toxicLevel++;
       System.out.println("Moar, moaaarr rum lad!");
-    } else {
+      if (this.toxicLevel >= 4) {
+        this.piratePassedOut = true;
+      }
+    } else if (!this.pirateAlive) {
       System.out.println("He's dead...");
     }
   }
 
   public void drinkSomeRum(int howMany) {
-    if (this.pirateAlive) {
+    if (this.pirateAlive && !this.piratePassedOut) {
       this.toxicLevel += howMany;
-    } else {
+      if (this.toxicLevel >= 4) {
+        this.piratePassedOut = true;
+      }
+    } else if (!this.pirateAlive) {
       System.out.println("He's dead...");
     }
   }
@@ -46,6 +52,7 @@ public class Pirate {
       } else {
         System.out.println(
             "\"Arghh, I'ma Pirate. How d'ya d'ink its goin?\", the pirate passes out and sleeps it off.");
+        this.piratePassedOut = true;
       }
     } else {
       System.out.println("He's dead...");
@@ -75,6 +82,12 @@ public class Pirate {
           System.out.println("Both pirates passed out.");
           break;
       }
+    } else if (this.pirateAlive && !pirate.pirateAlive) {
+      System.out.println("Ain't gonna kick this fella's body yarr...");
+    } else if (!this.pirateAlive && pirate.pirateAlive) {
+      System.out.println("What, how do I have to fight your contender?");
+    } else {
+      System.out.println("They are both dead...");
     }
   }
 }
