@@ -9,9 +9,7 @@ public class Flower extends Plant {
   }
 
   public Flower(String color) {
-    super();
-    this.setColor(color);
-    this.setType("Flower");
+    super(color, "Flower");
     this.setAbsorbRate(0.75);
   }
 }

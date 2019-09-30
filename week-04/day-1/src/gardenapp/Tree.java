@@ -9,9 +9,7 @@ public class Tree extends Plant {
   }
 
   public Tree(String color) {
-    super();
-    this.setColor(color);
-    this.setType("Tree");
+    super(color, "Tree");
     this.setAbsorbRate(0.4);
   }
 
