@@ -41,7 +41,13 @@ Collections.sort(dominoes);
 
     Collections.sort(dominoes);
 
-    System.out.println(dominoes.toString());*/
+    System.out.println(dominoes.toString());
+
+    System.out.println("===========");
+
+    for (Domino d : dominoes) {
+      d.printAllFields();
+    }*/
 
     List<Thing> fleet = new ArrayList<>();
 
@@ -60,5 +66,10 @@ Collections.sort(dominoes);
     Collections.sort(fleet);
 
     System.out.println(fleet);
+
+    System.out.println("===========");
+    for (Thing t : fleet) {
+      t.printAllFields();
+    }
   }
 }
