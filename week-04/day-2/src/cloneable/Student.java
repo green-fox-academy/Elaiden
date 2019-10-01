@@ -19,11 +19,16 @@ public class Student extends Person {
 
   @Override
   protected Object clone() {
-    return this;
+    return new Student(this.getName(), this.getAge(), this.getGender(),
+        this.getPreviousOrganization());
   }
 
   public void setPreviousOrganization(String previousOrganization) {
     this.previousOrganization = previousOrganization;
+  }
+
+  public String getPreviousOrganization() {
+    return previousOrganization;
   }
 
   public void setSkippedDays(int skippedDays) {
