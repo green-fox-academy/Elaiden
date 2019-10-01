@@ -7,6 +7,10 @@ public class AppMusic {
 
   public static void main(String[] args) {
 
+    System.out.println("=====");
+    System.out.println("https://github.com/green-fox-academy/teaching-materials/blob/master/workshop/interfaces/instruments/java.md");
+    System.out.println("=====");
+
     System.out
         .println("Test 1, create Electric Guitar, Bass Guitar and Violin with default strings.");
     ElectricGuitar guitar = new ElectricGuitar();
