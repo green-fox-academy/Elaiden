@@ -12,7 +12,7 @@ public class Exercise4 {
 
     DoubleSummaryStatistics stat = numbers.stream()
         .filter(x -> x % 2 != 0)
-        .mapToDouble((x) -> x).summaryStatistics();
+        .mapToDouble(x -> x).summaryStatistics();
 
     System.out.println(stat.getAverage());
   }
