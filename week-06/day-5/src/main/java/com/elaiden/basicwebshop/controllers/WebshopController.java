@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class WebshopController {
 
-  ArrayList<ShopItem> demoShop = new ArrayList<>();
+  private ArrayList<ShopItem> demoShop = new ArrayList<>();
 
   public WebshopController() {
     demoShop.add(new ShopItem("Running shoes", "Nike running shoes for every day sport",
@@ -84,7 +84,8 @@ public class WebshopController {
   public String searchBar(@RequestParam String searchBox, Model model) {
     List<ShopItem> itemsSearchedFor = demoShop.stream()
         .filter(
-            shopItem -> shopItem.getName().toLowerCase().contains(searchBox.toLowerCase()) || shopItem
+            shopItem -> shopItem.getName().toLowerCase().contains(searchBox.toLowerCase())
+                || shopItem
                 .getDescription().toLowerCase().contains(searchBox.toLowerCase()))
         .collect(Collectors.toList());
     model.addAttribute("wares", itemsSearchedFor);
