@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>The real webshop of Laci (nem Gabor, tenyleg!)</title>
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+</head>
+
+<body>
+    <h1>My Shop</h1>
+    <table id="filterButtons">
+        <tr>
+            <form method="GET">
+                <td><button formaction="http://localhost:8080/only-available">ONLY AVAILABLE</button></td>
+                <td><button formaction="http://localhost:8080/cheapest-first">CHEAPEST FIRST</button></td>
+                <td><button formaction="http://localhost:8080/contains-nike">CONTAINS NIKE</button></td>
+                <td><button formaction="http://localhost:8080/average-stock">AVERAGE STOCK</button></td>
+                <td><button formaction="http://localhost:8080/most-expensive">MOST EXPENSIVE AVAILABLE</button></td>
+            </form>
+        </tr>
+    </table>
+    <h2 th:text="${queried}"></h2>
+</body>
+
+</html>
