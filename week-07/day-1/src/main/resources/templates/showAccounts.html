@@ -14,7 +14,7 @@
     <td th:text="${accountActual.getName()}"></td>
     <td th:text="|${#numbers.formatDecimal(accountActual.getBalance(), 1, 2, 'POINT')} Zebra|"></td>
     <td th:text="${accountActual.getAnimalType()}"></td>
-    <div th:switch="${accountActual.getName()}">
+    <div th:switch="${accountActual.getName()}"> <!-- different solution is for example the king marking method, with a boolean -->
       <td th:case="'Scar'">Bad Guy</td>
       <td th:case="*">Good One</td>
     </div>
