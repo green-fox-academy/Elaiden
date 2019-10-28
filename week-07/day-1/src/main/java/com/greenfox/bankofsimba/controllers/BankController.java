@@ -14,7 +14,7 @@ public class BankController {
 
   @GetMapping(value = "/show")
   public String showAccount(Model model) {
-    BankAccount simba = new BankAccount("Simba", 2000, "lion");
+    BankAccount simba = new BankAccount("Simba", 2000, "lion", true);
     model.addAttribute("account", simba);
     return "showAccounts";
   }
@@ -27,12 +27,12 @@ public class BankController {
 
   @GetMapping(value = "/accounts")
   public String showAccounts(Model model) {
-    accounts.add(new BankAccount("Simba", 2000, "lion"));
-    accounts.add(new BankAccount("Timon", 500, "meerkat"));
-    accounts.add(new BankAccount("Pumbaa", 1000, "warthog"));
-    accounts.add(new BankAccount("Scar", 20000, "lion"));
-    accounts.add(new BankAccount("Nala", 2, "lion"));
-    accounts.add(new BankAccount("Mufasa", 30000, "lion"));
+    accounts.add(new BankAccount("Simba", 2000, "lion", true));
+    accounts.add(new BankAccount("Timon", 500, "meerkat", false));
+    accounts.add(new BankAccount("Pumbaa", 1000, "warthog", false));
+    accounts.add(new BankAccount("Scar", 20000, "lion", false));
+    accounts.add(new BankAccount("Nala", 2, "lion", false));
+    accounts.add(new BankAccount("Mufasa", 30000, "lion", true));
     model.addAttribute("accounts", accounts);
     return "showAccounts";
   }

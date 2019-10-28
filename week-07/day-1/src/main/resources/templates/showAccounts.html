@@ -14,6 +14,7 @@
     <td th:text="${accountActual.getName()}"></td>
     <td th:text="|${#numbers.formatDecimal(accountActual.getBalance(), 1, 2, 'POINT')} Zebra|"></td>
     <td th:text="${accountActual.getAnimalType()}"></td>
+    <td th:if="${accountActual.isKing()}"><b>King</b></td>
   </tr>
 </table>
 </body>
