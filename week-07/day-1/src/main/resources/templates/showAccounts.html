@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Thymeleaf Exercise #</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+  <meta charset="utf-8"/>
+</head>
+
+<body>
+<table>
+  <tr th:each="accountActual : ${accounts}">
+    <td th:text="${accountActualStat.index}"></td>
+    <td th:text="${accountActual.getName()}"></td>
+    <td th:text="|${#numbers.formatDecimal(accountActual.getBalance(), 1, 2, 'POINT')} Zebra|"></td>
+    <td th:text="${accountActual.getAnimalType()}"></td>
+  </tr>
+</table>
+</body>
+
+</html>
