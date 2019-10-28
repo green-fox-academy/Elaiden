@@ -6,15 +6,26 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BankController {
 
   private List<BankAccount> accounts = new ArrayList<>();
 
+  public BankController() {
+    accounts.add(new BankAccount("Simba", 2000, "lion", true, true));
+    accounts.add(new BankAccount("Timon", 500, "meerkat", false, true));
+    accounts.add(new BankAccount("Pumbaa", 1000, "warthog", false, true));
+    accounts.add(new BankAccount("Scar", 20000, "lion", false, false));
+    accounts.add(new BankAccount("Nala", 2, "lion", false, true));
+    accounts.add(new BankAccount("Mufasa", 30000, "lion", true, true));
+  }
+
   @GetMapping(value = "/show")
   public String showAccount(Model model) {
-    BankAccount simba = new BankAccount("Simba", 2000, "lion", true);
+    BankAccount simba = new BankAccount("Simba", 2000, "lion", true, true);
     model.addAttribute("account", simba);
     return "showAccounts";
   }
@@ -27,14 +38,19 @@ public class BankController {
 
   @GetMapping(value = "/accounts")
   public String showAccounts(Model model) {
-    accounts.add(new BankAccount("Simba", 2000, "lion", true));
-    accounts.add(new BankAccount("Timon", 500, "meerkat", false));
-    accounts.add(new BankAccount("Pumbaa", 1000, "warthog", false));
-    accounts.add(new BankAccount("Scar", 20000, "lion", false));
-    accounts.add(new BankAccount("Nala", 2, "lion", false));
-    accounts.add(new BankAccount("Mufasa", 30000, "lion", true));
     model.addAttribute("accounts", accounts);
     return "showAccounts";
+  }
+
+  @GetMapping(value = "/newAccount")
+  public String newAccount(@ModelAttribute(name = "newAnimal") BankAccount bankAccount) {
+    return "newAccount";
+  }
+
+  @PostMapping(value = "/newAccount")
+  public String addAccount(@ModelAttribute(name = "newAnimal") BankAccount bankAccount) {
+    accounts.add(bankAccount);
+    return "redirect:/accounts";
   }
 
   public void setAccounts(List<BankAccount> accounts) {
