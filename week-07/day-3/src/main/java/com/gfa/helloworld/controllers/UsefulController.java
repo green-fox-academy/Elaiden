@@ -18,7 +18,7 @@ public class UsefulController {
   }
 
   @GetMapping("/useful")
-  public String getContent(Model model) {
+  public String getContent() {
     return "useful";
   }
 

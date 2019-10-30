@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>GFA page</title>
+  <meta charset="utf-8"/>
+</head>
+
+<body>
+<h1 th:text="${studentCounter}"></h1>
+<table>
+  <tr>
+    <td><a href="http://localhost:8080/gfa/list"><b>GFA Student List</b></a></td>
+  </tr>
+  <tr>
+    <td><a href="http://localhost:8080/gfa/add"><b>New Student</b></a>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="http://localhost:8080/gfa/check"><b>Check a Student</b></a>
+    </td>
+  </tr>
+</table>
+</body>
+
+</html>
