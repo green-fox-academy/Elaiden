@@ -23,6 +23,7 @@ public class StudentServiceImpl implements StudentServiceProvider {
   private ArrayList<String> names;
 
   public StudentServiceImpl() {
+
     names = new ArrayList<>();
     names.add("Sanyi");
     names.add("Lilla");
