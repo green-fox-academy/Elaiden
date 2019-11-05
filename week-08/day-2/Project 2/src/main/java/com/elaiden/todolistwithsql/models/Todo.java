@@ -3,20 +3,21 @@ package com.elaiden.todolistwithsql.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Todo {
 
-  public Todo(String title) {
+  public Todo() {
+  }
+
+  public Todo(String title, boolean done, boolean urgent) {
     this.title = title;
+    this.urgent = urgent;
+    this.done = done;
   }
 
   @Id
