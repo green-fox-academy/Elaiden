@@ -1,8 +1,11 @@
 package com.elaiden.todolistwithsql.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +13,16 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Todo {
+
+  @ManyToOne(cascade = CascadeType.ALL)
+  Assignee assignee;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+  private String title;
+  private boolean urgent = false;
+  private boolean done = false;
 
   public Todo() {
   }
@@ -19,11 +32,4 @@ public class Todo {
     this.urgent = urgent;
     this.done = done;
   }
-
-  @Id
-  @GeneratedValue
-  private long id;
-  private String title;
-  private boolean urgent = false;
-  private boolean done = false;
 }
