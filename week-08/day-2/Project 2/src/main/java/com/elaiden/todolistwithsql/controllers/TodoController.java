@@ -1,7 +1,7 @@
 package com.elaiden.todolistwithsql.controllers;
 
 import com.elaiden.todolistwithsql.models.Todo;
-import com.elaiden.todolistwithsql.repositories.TodoRepository;
+import com.elaiden.todolistwithsql.services.ITodoService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/todo")
 public class TodoController {
 
-  private TodoRepository repository;
+  private ITodoService iTodoService;
 
   @Autowired
-  public TodoController(TodoRepository repository) {
-    this.repository = repository;
+  public TodoController(ITodoService iTodoService) {
+    this.iTodoService = iTodoService;
   }
 
   @GetMapping({"", "/", "/list"})
@@ -30,9 +30,9 @@ public class TodoController {
       @RequestParam(value = "isActive", required = false) boolean isActive) {
     List<Todo> todoList = new ArrayList<>();
     if (isActive) {
-      repository.findAllByDone(false).forEach(todoList::add);
+      iTodoService.findAllByDone(false).forEach(todoList::add);
     } else {
-      repository.findAll().forEach(todoList::add);
+      iTodoService.findAll().forEach(todoList::add);
     }
     model.addAttribute("todos", todoList);
     return "todolist";
@@ -45,26 +45,34 @@ public class TodoController {
 
   @PostMapping("/create")
   public String receiveNewTodo(@ModelAttribute(name = "newTodo") Todo newTodo) {
-    repository.save(newTodo);
+    iTodoService.save(newTodo);
     return "redirect:/todo/list";
   }
 
   @GetMapping("/{id}/delete")
   public String deleteTodo(@PathVariable(value = "id") long id) {
-    repository.deleteById(id);
+    iTodoService.deleteById(id);
     return "redirect:/todo/list";
   }
 
   @GetMapping("/{id}/edit")
   public String editTodo(@PathVariable(value = "id") long id,
       Model model) {
-    model.addAttribute("editTodo", repository.findById(id).orElse(null));
+    model.addAttribute("editTodo", iTodoService.findById(id).orElse(null));
     return "edittodo";
   }
 
   @PostMapping("/{id}/edit")
   public String returnEditedTodo(@ModelAttribute(name = "editTodo") Todo todoToSave) {
-    repository.save(todoToSave);
+    iTodoService.save(todoToSave);
     return "redirect:/todo/list";
+  }
+
+  @PostMapping("/search")
+  public String searchTodo(Model model, @RequestParam(name = "search") String search) {
+    List<Todo> todoList = new ArrayList<>();
+    iTodoService.findAllByTitleContains(search).forEach(todoList::add);
+    model.addAttribute("todos", todoList);
+    return "todolist";
   }
 }

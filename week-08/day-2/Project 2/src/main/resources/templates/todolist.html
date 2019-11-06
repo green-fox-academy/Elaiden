@@ -8,6 +8,15 @@
 </head>
 
 <body>
+<form th:action="@{/todo/search}" method="post">
+  <label for="search"></label>
+  <input type="search"
+         id="search"
+         name="search"
+         required
+  />
+  <button type="submit">SZORCS</button>
+</form>
 <h1>TODOS FOR TODAY:</h1>
 <a href="/todo/create">Add new todo</a>
 <table>
