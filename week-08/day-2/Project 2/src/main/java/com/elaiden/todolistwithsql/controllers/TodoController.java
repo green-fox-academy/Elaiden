@@ -1,6 +1,7 @@
 package com.elaiden.todolistwithsql.controllers;
 
 import com.elaiden.todolistwithsql.models.Todo;
+import com.elaiden.todolistwithsql.services.IAssigneeService;
 import com.elaiden.todolistwithsql.services.ITodoService;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TodoController {
 
   private ITodoService iTodoService;
+  private IAssigneeService iAssigneeService;
 
   @Autowired
-  public TodoController(ITodoService iTodoService) {
+  public TodoController(ITodoService iTodoService, IAssigneeService iAssigneeService) {
     this.iTodoService = iTodoService;
+    this.iAssigneeService = iAssigneeService;
   }
 
   @GetMapping({"", "/", "/list"})
@@ -58,12 +61,14 @@ public class TodoController {
   @GetMapping("/{id}/edit")
   public String editTodo(@PathVariable(value = "id") long id,
       Model model) {
-    model.addAttribute("editTodo", iTodoService.findById(id).orElse(null));
+    model.addAttribute("editTodo", iTodoService.findById(id));
+    model.addAttribute("assignees", iAssigneeService.findAll());
     return "edittodo";
   }
 
   @PostMapping("/{id}/edit")
   public String returnEditedTodo(@ModelAttribute(name = "editTodo") Todo todoToSave) {
+    todoToSave.setAssignee(iAssigneeService.findById(Long.parseLong(todoToSave.getAssigneeId())));
     iTodoService.save(todoToSave);
     return "redirect:/todo/list";
   }

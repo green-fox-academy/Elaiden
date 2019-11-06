@@ -34,4 +34,13 @@ public class Assignee {
     this.name = name;
     this.email = email;
   }
+
+  public void addTodo(Todo todo) {
+    todos.add(todo);
+  }
+
+  @Override
+  public String toString() {
+    return this.name;
+  }
 }

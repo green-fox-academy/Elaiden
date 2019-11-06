@@ -33,6 +33,14 @@
          th:field="*{done}"
   />
   <br>
+  <label for="assignee">Assignee for the task:</label>
+  <label for="assignee">Assignee</label>
+  <select id="assignee"
+          th:field="*{assigneeId}">
+    <option th:each="assignee : ${assignees}" th:value="${assignee.id}"
+            th:text="${assignee.name}"></option>
+  </select>
+  <br>
   <button type="submit">Submit</button>
   <a th:href="@{/todo/list}">Cancel</a>
 </form>

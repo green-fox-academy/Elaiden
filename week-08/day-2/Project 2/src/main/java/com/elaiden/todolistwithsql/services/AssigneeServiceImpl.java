@@ -2,7 +2,6 @@ package com.elaiden.todolistwithsql.services;
 
 import com.elaiden.todolistwithsql.models.Assignee;
 import com.elaiden.todolistwithsql.repositories.AssigneeRepository;
-import java.util.Optional;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class AssigneeServiceImpl implements IAssigneeService {
   }
 
   @Override
-  public Optional<Assignee> findById(long id) {
-    return assigneeRepository.findById(id);
+  public Assignee findById(long id) {
+    return assigneeRepository.findById(id).orElse(null);
   }
 }

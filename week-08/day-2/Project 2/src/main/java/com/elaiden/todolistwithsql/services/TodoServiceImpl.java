@@ -3,7 +3,6 @@ package com.elaiden.todolistwithsql.services;
 import com.elaiden.todolistwithsql.models.Todo;
 import com.elaiden.todolistwithsql.repositories.TodoRepository;
 import java.util.List;
-import java.util.Optional;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +41,8 @@ public class TodoServiceImpl implements ITodoService {
   }
 
   @Override
-  public Optional<Todo> findById(long id) {
-    return todoRepository.findById(id);
+  public Todo findById(long id) {
+    return todoRepository.findById(id).orElse(null);
   }
 
   @Override

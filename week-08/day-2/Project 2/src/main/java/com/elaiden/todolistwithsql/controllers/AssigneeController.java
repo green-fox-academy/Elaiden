@@ -46,7 +46,7 @@ public class AssigneeController {
   @GetMapping("/{id}/edit")
   public String editAssignee(@PathVariable(value = "id") long id,
       Model model) {
-    model.addAttribute("editAssignee", iAssigneeService.findById(id).orElse(null));
+    model.addAttribute("editAssignee", iAssigneeService.findById(id));
     return "editassignee";
   }
 
