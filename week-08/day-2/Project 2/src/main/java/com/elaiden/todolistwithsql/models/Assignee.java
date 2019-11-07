@@ -43,4 +43,8 @@ public class Assignee {
   public String toString() {
     return this.name;
   }
+
+  public void removeTodo(Todo todo) {
+    todos.remove(todo);
+  }
 }

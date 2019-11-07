@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 public class Todo {
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.MERGE)
   Assignee assignee;
   @Transient
   private String assigneeId;
@@ -39,5 +39,9 @@ public class Todo {
   public void setAssignee(Assignee assignee) {
     assignee.addTodo(this);
     this.assignee = assignee;
+  }
+
+  public void removeAssignee() {
+    assignee.removeTodo(this);
   }
 }

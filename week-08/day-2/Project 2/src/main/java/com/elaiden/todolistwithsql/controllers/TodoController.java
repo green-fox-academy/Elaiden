@@ -33,7 +33,7 @@ public class TodoController {
       @RequestParam(value = "isActive", required = false) boolean isActive) {
     List<Todo> todoList = new ArrayList<>();
     if (isActive) {
-      iTodoService.findAllByDone(false).forEach(todoList::add);
+      todoList.addAll(iTodoService.findAllByDone(false));
     } else {
       iTodoService.findAll().forEach(todoList::add);
     }
@@ -54,6 +54,7 @@ public class TodoController {
 
   @GetMapping("/{id}/delete")
   public String deleteTodo(@PathVariable(value = "id") long id) {
+    iTodoService.findById(id).removeAssignee();
     iTodoService.deleteById(id);
     return "redirect:/todo/list";
   }
@@ -76,7 +77,7 @@ public class TodoController {
   @PostMapping("/search")
   public String searchTodo(Model model, @RequestParam(name = "search") String search) {
     List<Todo> todoList = new ArrayList<>();
-    iTodoService.findAllByTitleContains(search).forEach(todoList::add);
+    todoList.addAll(iTodoService.findAllByTitleContains(search));
     model.addAttribute("todos", todoList);
     return "todolist";
   }
