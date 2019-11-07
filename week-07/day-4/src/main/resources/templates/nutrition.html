@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Nutrition</title>
+  <meta charset="utf-8"/>
+</head>
+
+<body>
+<p th:text="|This is ${queriedFox.getName()}. Currently living on ${queriedFox.getFood()} and ${queriedFox.getDrink()}.|"></p>
+<form th:action="@{/nutritionStore(name=${queriedFox.getName()})}" th:object="${queriedFox}" method="post">
+  <label for="allFood">Food</label>
+  <select id="allFood"
+          name="allFood">
+    <option th:each="food : ${foodList}"
+            th:text="${food}">
+
+    </option>
+  </select>
+  <label for="allDrink">Drink</label>
+  <select id="allDrink"
+          name="allDrink">
+    <option th:each="drink : ${drinkList}"
+            th:text="${drink}">
+
+    </option>
+  </select>
+  <button type="submit">Change</button>
+</form>
+</body>
+
+</html>
