@@ -21,7 +21,7 @@ public class Assignee {
   List<Todo> todos;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
   private String name;
   private String email;

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Todos of an assignee</title>
+  <link href="/style.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<ul th:each="todo : ${assigneesList}">
+  <li th:text="${todo.getTitle()}"></li>
+</ul>
+</body>
+
+</html>

@@ -1,5 +1,7 @@
 package com.elaiden.todolistwithsql.models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
@@ -21,11 +24,14 @@ public class Todo {
   private String assigneeId;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private long id;
   private String title;
   private boolean urgent = false;
   private boolean done = false;
+  String date = getDate();
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  String dueDate = getDate();
 
   public Todo() {
   }
@@ -43,5 +49,12 @@ public class Todo {
 
   public void removeAssignee() {
     assignee.removeTodo(this);
+  }
+
+  public String getDate() {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date date = new Date();
+    String formatDate = dateFormat.format(date);
+    return formatDate;
   }
 }

@@ -32,6 +32,13 @@
          th:checked="*{done}"
          th:field="*{done}"
   />
+  <label for="dueDate">Due Date</label>
+  <input type="date"
+         th:value="*{date}"
+         id="dueDate"
+         name="dueDate"
+         th:field="*{dueDate}"
+  />
   <br>
   <label for="assignee">Assignee for the task:</label>
   <label for="assignee">Assignee</label>

@@ -11,4 +11,7 @@ public interface ITodoService {
   void deleteById(long id);
   Todo findById(long id);
   List<Todo> findAllByTitleContains(String search);
+  List<Todo> findAllByDateContains(String search);
+  List<Todo> findAllByDueDateContains(String search);
+  List<Todo> findAllByAssignee_NameContains(String name);
 }

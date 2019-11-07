@@ -49,4 +49,19 @@ public class TodoServiceImpl implements ITodoService {
   public List<Todo> findAllByTitleContains(String search) {
     return todoRepository.findAllByTitleContains(search);
   }
+
+  @Override
+  public List<Todo> findAllByDateContains(String search) {
+    return todoRepository.findAllByDateContains(search);
+  }
+
+  @Override
+  public List<Todo> findAllByDueDateContains(String search) {
+    return todoRepository.findAllByDueDateContains(search);
+  }
+
+  @Override
+  public List<Todo> findAllByAssignee_NameContains(String name) {
+    return todoRepository.findAllByAssignee_NameContains(name);
+  }
 }

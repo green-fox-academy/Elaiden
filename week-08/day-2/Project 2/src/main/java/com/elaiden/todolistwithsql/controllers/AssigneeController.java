@@ -2,6 +2,7 @@ package com.elaiden.todolistwithsql.controllers;
 
 import com.elaiden.todolistwithsql.models.Assignee;
 import com.elaiden.todolistwithsql.services.IAssigneeService;
+import com.elaiden.todolistwithsql.services.ITodoService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +18,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/assignee")
 public class AssigneeController {
 
-  private IAssigneeService iAssigneeService;
+  private IAssigneeService assigneeService;
+  private ITodoService todoService;
 
   @Autowired
-  public AssigneeController(IAssigneeService iAssigneeService) {
-    this.iAssigneeService = iAssigneeService;
+  public AssigneeController(IAssigneeService assigneeService, ITodoService todoService) {
+    this.assigneeService = assigneeService;
+    this.todoService = todoService;
   }
 
   @GetMapping({"", "/", "/list"})
   public String assigneeList(Model model) {
     List<Assignee> assigneeList = new ArrayList<>();
-    iAssigneeService.findAll().forEach(assigneeList::add);
+    assigneeService.findAll().forEach(assigneeList::add);
     model.addAttribute("assignees", assigneeList);
     return "assigneelist";
   }
@@ -39,27 +42,33 @@ public class AssigneeController {
 
   @PostMapping("/create")
   public String receiveNewAssignee(@ModelAttribute(name = "newAssignee") Assignee newAssignee) {
-    iAssigneeService.save(newAssignee);
+    assigneeService.save(newAssignee);
     return "redirect:/assignee/list";
   }
 
   @GetMapping("/{id}/edit")
   public String editAssignee(@PathVariable(value = "id") long id,
       Model model) {
-    model.addAttribute("editAssignee", iAssigneeService.findById(id));
+    model.addAttribute("editAssignee", assigneeService.findById(id));
     return "editassignee";
   }
 
   @PostMapping("/{id}/edit")
   public String returnEditedAssignee(
       @ModelAttribute(name = "editAssignee") Assignee assigneeToSave) {
-    iAssigneeService.save(assigneeToSave);
+    assigneeService.save(assigneeToSave);
     return "redirect:/assignee/list";
   }
 
   @GetMapping("/{id}/delete")
   public String deleteAssignee(@PathVariable(value = "id") long id) {
-    iAssigneeService.deleteById(id);
+    assigneeService.deleteById(id);
     return "redirect:/assignee/list";
+  }
+
+  @GetMapping("/{id}/list")
+  public String showTodoListOfAssignee(@PathVariable(value = "id") String id, Model model) {
+    model.addAttribute("assigneesList", assigneeService.findById(Long.parseLong(id)).getTodos());
+    return "todosofassignee";
   }
 }

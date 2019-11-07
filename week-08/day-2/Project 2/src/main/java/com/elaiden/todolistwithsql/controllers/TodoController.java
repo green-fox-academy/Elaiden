@@ -1,5 +1,6 @@
 package com.elaiden.todolistwithsql.controllers;
 
+import com.elaiden.todolistwithsql.models.Assignee;
 import com.elaiden.todolistwithsql.models.Todo;
 import com.elaiden.todolistwithsql.services.IAssigneeService;
 import com.elaiden.todolistwithsql.services.ITodoService;
@@ -19,25 +20,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/todo")
 public class TodoController {
 
-  private ITodoService iTodoService;
-  private IAssigneeService iAssigneeService;
+  private ITodoService todoService;
+  private IAssigneeService assigneeService;
 
   @Autowired
-  public TodoController(ITodoService iTodoService, IAssigneeService iAssigneeService) {
-    this.iTodoService = iTodoService;
-    this.iAssigneeService = iAssigneeService;
+  public TodoController(ITodoService todoService, IAssigneeService assigneeService) {
+    this.todoService = todoService;
+    this.assigneeService = assigneeService;
   }
 
   @GetMapping({"", "/", "/list"})
   public String list(Model model,
       @RequestParam(value = "isActive", required = false) boolean isActive) {
     List<Todo> todoList = new ArrayList<>();
+    List<Assignee> workers = new ArrayList<>();
+    assigneeService.findAll().forEach(workers::add);
     if (isActive) {
-      todoList.addAll(iTodoService.findAllByDone(false));
+      todoList.addAll(todoService.findAllByDone(false));
     } else {
-      iTodoService.findAll().forEach(todoList::add);
+      todoService.findAll().forEach(todoList::add);
     }
     model.addAttribute("todos", todoList);
+    model.addAttribute("workers", workers);
     return "todolist";
   }
 
@@ -48,36 +52,39 @@ public class TodoController {
 
   @PostMapping("/create")
   public String receiveNewTodo(@ModelAttribute(name = "newTodo") Todo newTodo) {
-    iTodoService.save(newTodo);
+    todoService.save(newTodo);
     return "redirect:/todo/list";
   }
 
   @GetMapping("/{id}/delete")
   public String deleteTodo(@PathVariable(value = "id") long id) {
-    iTodoService.findById(id).removeAssignee();
-    iTodoService.deleteById(id);
+    todoService.findById(id).removeAssignee();
+    todoService.deleteById(id);
     return "redirect:/todo/list";
   }
 
   @GetMapping("/{id}/edit")
   public String editTodo(@PathVariable(value = "id") long id,
       Model model) {
-    model.addAttribute("editTodo", iTodoService.findById(id));
-    model.addAttribute("assignees", iAssigneeService.findAll());
+    model.addAttribute("editTodo", todoService.findById(id));
+    model.addAttribute("assignees", assigneeService.findAll());
     return "edittodo";
   }
 
   @PostMapping("/{id}/edit")
   public String returnEditedTodo(@ModelAttribute(name = "editTodo") Todo todoToSave) {
-    todoToSave.setAssignee(iAssigneeService.findById(Long.parseLong(todoToSave.getAssigneeId())));
-    iTodoService.save(todoToSave);
+    todoToSave.setAssignee(assigneeService.findById(Long.parseLong(todoToSave.getAssigneeId())));
+    todoService.save(todoToSave);
     return "redirect:/todo/list";
   }
 
   @PostMapping("/search")
   public String searchTodo(Model model, @RequestParam(name = "search") String search) {
     List<Todo> todoList = new ArrayList<>();
-    todoList.addAll(iTodoService.findAllByTitleContains(search));
+    todoService.findAllByTitleContains(search).forEach(todoList::add);
+    todoService.findAllByDateContains(search).forEach(todoList::add);
+    todoService.findAllByDueDateContains(search).forEach(todoList::add);
+    todoService.findAllByAssignee_NameContains(search).forEach(todoList::add);
     model.addAttribute("todos", todoList);
     return "todolist";
   }
