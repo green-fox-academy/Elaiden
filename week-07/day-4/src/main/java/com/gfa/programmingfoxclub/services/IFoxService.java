@@ -1,5 +1,7 @@
 package com.gfa.programmingfoxclub.services;
 
-public interface IFoxService {
+import com.gfa.programmingfoxclub.models.Fox;
 
+public interface IFoxService {
+  public Fox findByNameEquals(String name);
 }

@@ -1,8 +1,9 @@
 package com.gfa.programmingfoxclub.controllers;
 
-import com.gfa.programmingfoxclub.services.ClubService;
+import com.gfa.programmingfoxclub.services.IFoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,55 +11,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
-  private ClubService clubService;
+  private IFoxService foxService;
 
   @Autowired
-  public MainController(ClubService clubService) {
-    this.clubService = clubService;
+  public MainController(IFoxService foxService) {
+    this.foxService = foxService;
   }
 
-  /*@GetMapping("/")
-  public String infoWithPet(Model model,
-      @RequestParam(value = "name", required = false) String name) {
-    if (name == null) {
-      return "redirect:/login";
-    } else if (clubService.getFoxClub().stream().noneMatch(x -> x.getName().equals(name))) {
-      return "redirect:/login";
-    } else {
-      Fox queriedFox = clubService.catchThisFox(name);
-      model.addAttribute("foxName", queriedFox.getName());
-      model.addAttribute("foxFood", queriedFox.getFood());
-      model.addAttribute("foxDrink", queriedFox.getDrink());
-      model.addAttribute("foxTricksAmount", queriedFox.getTricks().size());
-      model.addAttribute("foxTricks", queriedFox.getTricks());
-      return "index";
-    }
-  }*/
-
-  @GetMapping("/login")
+  @GetMapping({"", "/", "/login"})
   public String loginPage() {
     return "login";
   }
 
-  /*@PostMapping("/login")
+  @PostMapping({"", "/", "/login"})
   public String loginPet(@RequestParam(value = "name") String name, Model model) {
-    if (clubService.getFoxClub().stream().anyMatch(fox -> fox.getName().equals(name))) {
-      return "redirect:/?name=" + name;
-    } else {
+    if (foxService.findByNameEquals(name) == null) {
       model.addAttribute("errorMessage",
           "You have provided a name that has not been used before, add it as a new one!");
       model.addAttribute("errorColor", "red");
       return "login";
+    } else {
+      return "redirect:/fox?name=" + name;
     }
-  }*/
+  }
 
   /*@GetMapping("/nutritionStore")
   public String nutritionShow(Model model, @RequestParam(value = "name") String name) {
-    Fox queriedFox = clubService.catchThisFox(name);
-    model.addAttribute("queriedFox", queriedFox);
-    model.addAttribute("foodList", clubService.getFood());
-    model.addAttribute("drinkList", clubService.getDrink());
-    return "nutrition";
+    if (foxService.findByNameEquals(name) != null) {
+      model.addAttribute("foxToChangeNutrition", foxService.findByNameEquals(name));
+      model.addAttribute("food", )
+      return "redirect:/nutrition?name=" + name;
+    } else {
+      model.addAttribute("errorMessage",
+          "There is no fox in our database with the given name!");
+      model.addAttribute("errorColor", "red");
+      return "nutrition";
+    }
   }*/
 
   @PostMapping("/nutritionStore")

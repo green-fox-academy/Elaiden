@@ -11,12 +11,12 @@
   <li><a href="http://localhost:8080/login">Information</a><br></li>
 </ul>
 <img src="/greenfox.png">
-<p th:text="|This is ${foxName}. Currently living on ${foxFood} and ${foxDrink}. He/she knows ${foxTricksAmount} tricks.|"></p>
+<p th:text="|This is ${queriedFox.getName()}. Currently living on ${queriedFox.getFood()} and ${queriedFox.getDrink()}. He/she knows ${tricks.size()} tricks.|"></p>
 <h1>Known tricks</h1>
-<div th:if="${foxTricksAmount == 0}">You don't know any tricks, yet. Go, and learn some!
+<div th:if="${tricks.size() == 0}">You don't know any tricks, yet. Go, and learn some!
 </div>
-<ul th:each="trick : ${foxTricks}">
-  <li th:text="trick"></li>
+<ul th:each="trick : ${tricks}">
+  <li th:text="${trick}"></li>
 </ul>
 </body>
 

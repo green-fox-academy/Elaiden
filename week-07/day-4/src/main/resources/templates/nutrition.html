@@ -7,12 +7,12 @@
 </head>
 
 <body>
-<p th:text="|This is ${queriedFox.getName()}. Currently living on ${queriedFox.getFood()} and ${queriedFox.getDrink()}.|"></p>
-<form th:action="@{/nutritionStore(name=${queriedFox.getName()})}" th:object="${queriedFox}" method="post">
+<p th:text="|This is ${foxToChangeNutrition.getName()}. Currently living on ${foxToChangeNutrition.getFood()} and ${foxToChangeNutrition.getDrink()}.|"></p>
+<form th:action="@{/nutritionStore(name=${foxToChangeNutrition.getName()})}" th:object="${foxToChangeNutrition}" method="post">
   <label for="allFood">Food</label>
   <select id="allFood"
           name="allFood">
-    <option th:each="food : ${foodList}"
+    <option th:each="food : ${}"
             th:text="${food}">
 
     </option>

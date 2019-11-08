@@ -8,14 +8,28 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Fox {
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "id")
+  Food foodForThem;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "id")
+  Drink drinkForThem;
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "id")
+  List<Trick> tricks;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +38,9 @@ public class Fox {
   private String food;
   private String drink;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "fox", fetch = FetchType.LAZY)
-  List<Trick> tricks;
-
-  public Fox() {
+  public Fox(Food foodForThem, Drink drinkForThem) {
+    this.drinkForThem = drinkForThem;
+    this.foodForThem = foodForThem;
     tricks = new ArrayList<>();
   }
 
