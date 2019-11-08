@@ -18,12 +18,12 @@ public class MainController {
     this.foxService = foxService;
   }
 
-  @GetMapping({"", "/", "/login"})
+  @GetMapping(value = {"", "/", "/login"})
   public String loginPage() {
     return "login";
   }
 
-  @PostMapping({"", "/", "/login"})
+  @PostMapping(value = {"", "/", "/login"})
   public String loginPet(@RequestParam(value = "name") String name, Model model) {
     if (foxService.findByNameEquals(name) == null) {
       model.addAttribute("errorMessage",
@@ -33,24 +33,5 @@ public class MainController {
     } else {
       return "redirect:/fox?name=" + name;
     }
-  }
-
-  /*@GetMapping("/nutritionStore")
-  public String nutritionShow(Model model, @RequestParam(value = "name") String name) {
-    if (foxService.findByNameEquals(name) != null) {
-      model.addAttribute("foxToChangeNutrition", foxService.findByNameEquals(name));
-      model.addAttribute("food", )
-      return "redirect:/nutrition?name=" + name;
-    } else {
-      model.addAttribute("errorMessage",
-          "There is no fox in our database with the given name!");
-      model.addAttribute("errorColor", "red");
-      return "nutrition";
-    }
-  }*/
-
-  @PostMapping("/nutritionStore")
-  public String changeNutrition(@RequestParam(value = "name") String name) {
-    return "redirect:/?name=" + name;
   }
 }

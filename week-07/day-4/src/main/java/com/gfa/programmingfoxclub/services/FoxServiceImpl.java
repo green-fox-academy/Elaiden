@@ -19,4 +19,9 @@ public class FoxServiceImpl implements IFoxService {
   public Fox findByNameEquals(String name) {
     return foxRepository.findByNameEquals(name);
   }
+
+  @Override
+  public void save(Fox fox) {
+    foxRepository.save(fox);
+  }
 }

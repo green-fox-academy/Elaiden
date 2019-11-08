@@ -9,6 +9,7 @@
 <body>
 <ul>
   <li><a href="http://localhost:8080/login">Information</a><br></li>
+  <li><a th:href="@{/fox/nutrition(name=${queriedFox.getName()})}">Nutrition</a></li>
 </ul>
 <img src="/greenfox.png">
 <p th:text="|This is ${queriedFox.getName()}. Currently living on ${queriedFox.getFood()} and ${queriedFox.getDrink()}. He/she knows ${tricks.size()} tricks.|"></p>

@@ -27,4 +27,9 @@ public class Drink {
   public Drink() {
     foxes = new ArrayList<>();
   }
+
+  @Override
+  public String toString() {
+    return name;
+  }
 }

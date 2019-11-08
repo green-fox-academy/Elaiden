@@ -1,5 +1,8 @@
 package com.gfa.programmingfoxclub.services;
 
-public interface IDrinkService {
+import com.gfa.programmingfoxclub.models.Drink;
+import java.util.List;
 
+public interface IDrinkService {
+  List<Drink> findAll();
 }

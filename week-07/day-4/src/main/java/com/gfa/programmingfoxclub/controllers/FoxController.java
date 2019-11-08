@@ -1,5 +1,6 @@
 package com.gfa.programmingfoxclub.controllers;
 
+import com.gfa.programmingfoxclub.models.Fox;
 import com.gfa.programmingfoxclub.services.IDrinkService;
 import com.gfa.programmingfoxclub.services.IFoodService;
 import com.gfa.programmingfoxclub.services.IFoxService;
@@ -8,11 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/fox")
 public class FoxController {
 
   private IFoxService foxService;
@@ -30,9 +30,9 @@ public class FoxController {
     this.trickService = trickService;
   }
 
-  @GetMapping({"/", ""})
+  @GetMapping(value = "/fox")
   public String infoWithPet(Model model,
-      @RequestParam(value = "name", required = false) String name) {
+      @RequestParam(name = "name", required = false) String name) {
     if (name == null) {
       return "redirect:/login";
     } else if (foxService.findByNameEquals(name) == null) {
@@ -45,4 +45,21 @@ public class FoxController {
     }
   }
 
+  @GetMapping(value = "/fox/nutrition")
+  public String nutritionShow(Model model, @RequestParam(name = "name") String name) {
+    model.addAttribute("foxToChangeNutrition", foxService.findByNameEquals(name));
+    model.addAttribute("foodList", foodService.findAll());
+    model.addAttribute("drinkList", drinkService.findAll());
+    return "nutrition";
+  }
+
+  @PostMapping(value = "/fox/nutrition")
+  public String changeNutrition(@RequestParam(name = "name") String name,
+      @RequestParam(name = "allFood") String food, @RequestParam(name = "allDrink") String drink) {
+    Fox fox = foxService.findByNameEquals(name);
+    fox.setFood(food);
+    fox.setDrink(drink);
+    foxService.save(fox);
+    return "redirect:/fox?name=" + fox.getName();
+  }
 }
