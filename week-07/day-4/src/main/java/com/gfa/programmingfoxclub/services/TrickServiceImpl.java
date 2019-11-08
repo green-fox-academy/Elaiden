@@ -26,4 +26,21 @@ public class TrickServiceImpl implements ITrickService {
     }
     return null;
   }
+
+  @Override
+  public List<Trick> findAll() {
+    List<Trick> tricks = new ArrayList<>();
+    trickRepository.findAll().forEach(tricks::add);
+    return tricks;
+  }
+
+  @Override
+  public Trick findByTrickNameEquals(String trickName) {
+    return trickRepository.findByTrickNameEquals(trickName);
+  }
+
+  @Override
+  public void save(Trick trick) {
+    trickRepository.save(trick);
+  }
 }

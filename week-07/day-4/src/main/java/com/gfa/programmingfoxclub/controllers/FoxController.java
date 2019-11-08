@@ -1,6 +1,7 @@
 package com.gfa.programmingfoxclub.controllers;
 
 import com.gfa.programmingfoxclub.models.Fox;
+import com.gfa.programmingfoxclub.models.Trick;
 import com.gfa.programmingfoxclub.services.IDrinkService;
 import com.gfa.programmingfoxclub.services.IFoodService;
 import com.gfa.programmingfoxclub.services.IFoxService;
@@ -60,6 +61,24 @@ public class FoxController {
     fox.setFood(food);
     fox.setDrink(drink);
     foxService.save(fox);
+    return "redirect:/fox?name=" + fox.getName();
+  }
+
+  @GetMapping(value = "/fox/trickCenter")
+  public String showTrickCenter(Model model, @RequestParam(name = "name") String name) {
+    Fox fox = foxService.findByNameEquals(name);
+    model.addAttribute("chosenFox", fox);
+    model.addAttribute("tricks", trickService.findAll());
+    return "trickcenter";
+  }
+
+  @PostMapping(value = "/fox/trickCenter")
+  public String learnNewTrick(@RequestParam(name = "name") String name,
+      @RequestParam(name = "trickOption") String trick) {
+    Fox fox = foxService.findByNameEquals(name);
+    Trick trickToLearn = trickService.findByTrickNameEquals(trick);
+    trickToLearn.setFox(fox);
+    trickService.save(trickToLearn);
     return "redirect:/fox?name=" + fox.getName();
   }
 }

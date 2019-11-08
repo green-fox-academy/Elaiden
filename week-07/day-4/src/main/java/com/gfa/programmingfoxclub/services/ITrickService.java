@@ -5,4 +5,7 @@ import java.util.List;
 
 public interface ITrickService {
   List<Trick> findAllByFox_Id(long foxId);
+  List<Trick> findAll();
+  Trick findByTrickNameEquals(String trickName);
+  void save(Trick trick);
 }

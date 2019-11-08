@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hall of Tricks</title>
+</head>
+
+<body>
+<form th:action="@{/fox/trickCenter(name=${chosenFox.getName()})}" th:object="${chosenFox}"
+      method="post">
+  <label for="trickOption">Tricks</label>
+  <select name="trickOption"
+          id="trickOption">
+    <option th:each="trick : ${tricks}"
+            th:text="${trick}">
+    </option>
+  </select>
+  <button type="submit">Learn</button>
+</form>
+</body>
+
+</html>

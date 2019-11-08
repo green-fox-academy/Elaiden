@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface TrickRepository extends CrudRepository<Trick, Long> {
 
   List<Trick> findAllByFox_Id(long foxId);
+  List<Trick> findAll();
+  Trick findByTrickNameEquals(String trickName);
 }
