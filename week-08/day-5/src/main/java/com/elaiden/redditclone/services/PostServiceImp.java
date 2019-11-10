@@ -19,13 +19,6 @@ public class PostServiceImp implements PostServicable {
 
 
   @Override
-  public List<Post> findAllPosts() {
-    List<Post> allPosts = new ArrayList<>();
-    postRepository.findAll().forEach(allPosts::add);
-    return allPosts;
-  }
-
-  @Override
   public void save(Post post) {
     postRepository.save(post);
   }
@@ -56,7 +49,8 @@ public class PostServiceImp implements PostServicable {
   }
 
   @Override
-  public List<Post> showAllDescendingByPoints() {
-    return new ArrayList<>(postRepository.findAllByOrderByPostScoreDesc());
+  public List<Post> showAllDescendingPerPage(int page) {
+    return new ArrayList<>(
+        postRepository.findAllByOrderByPostScoreDesc((page - 1) * 10, page * 10));
   }
 }
