@@ -10,4 +10,5 @@ public interface PostServicable {
   Post findPostById(long id);
   void findAndIncrement(long id);
   void findAndDecrement(long id);
+  List<Post> showAllDescendingByPoints();
 }

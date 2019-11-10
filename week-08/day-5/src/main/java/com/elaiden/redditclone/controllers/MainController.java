@@ -18,8 +18,7 @@ public class MainController {
 
   @GetMapping(value = {"", "/"})
   public String indexPage(Model model) {
-    model.addAttribute("postList", postService.findAllPosts());
+    model.addAttribute("postList", postService.showAllDescendingByPoints());
     return "index";
   }
-
 }

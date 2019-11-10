@@ -54,4 +54,9 @@ public class PostServiceImp implements PostServicable {
     }
     postRepository.save(post);
   }
+
+  @Override
+  public List<Post> showAllDescendingByPoints() {
+    return new ArrayList<>(postRepository.findAllByOrderByPostScoreDesc());
+  }
 }
