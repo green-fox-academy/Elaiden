@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to Reddit (kek)</title>
+  <link rel="stylesheet" type="text/css" href="/style.css"/>
+</head>
+
+<body>
+<a th:href="@{/submit}">Submit new post</a>
+<h2>Trending posts</h2>
+<table>
+  <tbody>
+  <tr th:each="post : ${postList}">
+    <td th:text="${post.postScore}"></td>
+    <td><a th:href="@{${post.getId()} + '/upvote'}">+</a></td>
+    <td><a th:href="@{${post.getId()} + '/downvote'}">-</a></td>
+    <td><a th:href="${post.getPostContent()}" th:text="${post.getPostTitle()}"></a></td>
+    <td th:text="${post.getDatePosted()}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+
+</html>
