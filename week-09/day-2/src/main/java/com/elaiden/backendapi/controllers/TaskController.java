@@ -1,11 +1,17 @@
 package com.elaiden.backendapi.controllers;
 
+import com.elaiden.backendapi.models.AppendA;
+import com.elaiden.backendapi.models.DoUntil;
+import com.elaiden.backendapi.models.DoUntilData;
 import com.elaiden.backendapi.models.Doubling;
 import com.elaiden.backendapi.models.Error;
 import com.elaiden.backendapi.models.Greeter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,4 +50,28 @@ public class TaskController {
     return ResponseEntity.ok().body(greeter);
   }
 
+  @GetMapping("/appenda/{appendable}")
+  public ResponseEntity appendWordWithA(@PathVariable String appendable) {
+    if (appendable == null) {
+      return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+    AppendA append = new AppendA(appendable);
+    return ResponseEntity.ok().body(append);
+  }
+
+  @PostMapping("/dountil/{action}")
+  public ResponseEntity doActionUntilSpecified(@PathVariable String action, @RequestBody
+      DoUntilData until) {
+    if (action.equals("sum")) {
+      DoUntil doUntil = new DoUntil();
+      doUntil.setResult(doUntil.sum(until.getUntil()));
+      return ResponseEntity.ok().body(doUntil);
+    } else if (action.equals("factor")) {
+      DoUntil doUntil = new DoUntil();
+      doUntil.setResult(doUntil.factor(until.getUntil()));
+      return ResponseEntity.ok().body(doUntil);
+    }
+    Error error = new Error("Please provide a number!");
+    return ResponseEntity.ok().body(error);
+  }
 }
