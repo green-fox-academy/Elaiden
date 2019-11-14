@@ -58,7 +58,7 @@ public class TodoController {
 
   @GetMapping("/{id}/delete")
   public String deleteTodo(@PathVariable(value = "id") long id) {
-    todoService.findById(id).removeAssignee();
+    todoService.findById(id).setAssigneeId(null);
     todoService.deleteById(id);
     return "redirect:/todo/list";
   }

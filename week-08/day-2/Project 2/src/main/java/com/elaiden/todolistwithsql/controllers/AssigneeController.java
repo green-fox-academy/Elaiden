@@ -1,6 +1,7 @@
 package com.elaiden.todolistwithsql.controllers;
 
 import com.elaiden.todolistwithsql.models.Assignee;
+import com.elaiden.todolistwithsql.models.Todo;
 import com.elaiden.todolistwithsql.services.IAssigneeService;
 import com.elaiden.todolistwithsql.services.ITodoService;
 import java.util.ArrayList;
@@ -62,6 +63,10 @@ public class AssigneeController {
 
   @GetMapping("/{id}/delete")
   public String deleteAssignee(@PathVariable(value = "id") long id) {
+    List<Todo> assignedList = new ArrayList<>(todoService.findAllByAssignee_Id(id));
+    for (int i = 0; i < assignedList.size(); i++) {
+      assignedList.get(i).removeAssignee(assigneeService.findById(id));
+    }
     assigneeService.deleteById(id);
     return "redirect:/assignee/list";
   }

@@ -14,4 +14,5 @@ public interface ITodoService {
   List<Todo> findAllByDateContains(String search);
   List<Todo> findAllByDueDateContains(String search);
   List<Todo> findAllByAssignee_NameContains(String name);
+  List<Todo> findAllByAssignee_Id(long id);
 }

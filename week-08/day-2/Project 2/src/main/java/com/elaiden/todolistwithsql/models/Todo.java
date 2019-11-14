@@ -18,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Todo {
 
-  @ManyToOne(cascade = CascadeType.MERGE)
+  @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
   Assignee assignee;
   @Transient
   private String assigneeId;
@@ -47,8 +47,9 @@ public class Todo {
     this.assignee = assignee;
   }
 
-  public void removeAssignee() {
+  public void removeAssignee(Assignee assignee) {
     assignee.removeTodo(this);
+    this.assignee = assignee;
   }
 
   public String getDate() {

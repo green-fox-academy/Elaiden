@@ -2,6 +2,7 @@ package com.elaiden.todolistwithsql.services;
 
 import com.elaiden.todolistwithsql.models.Todo;
 import com.elaiden.todolistwithsql.repositories.TodoRepository;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -63,5 +64,10 @@ public class TodoServiceImpl implements ITodoService {
   @Override
   public List<Todo> findAllByAssignee_NameContains(String name) {
     return todoRepository.findAllByAssignee_NameContains(name);
+  }
+
+  @Override
+  public List<Todo> findAllByAssignee_Id(long id) {
+    return new ArrayList<>(todoRepository.findAllByAssignee_Id(id));
   }
 }
