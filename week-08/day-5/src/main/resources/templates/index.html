@@ -4,35 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Welcome to Reddit (kek)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 
-<body>
-<a th:href="@{/submit}">Submit new post</a>
-<h2>Trending posts</h2>
-<div class="table-responsive">
-  <table class="table">
-    <tbody>
-    <tr th:each="post : ${postList}">
-      <td th:text="${post.postScore}"></td>
-      <td><a th:href="@{${post.getId()} + '/upvote'}">+</a></td>
-      <td><a th:href="@{${post.getId()} + '/downvote'}">-</a></td>
-      <td><a th:href="${post.getPostContent()}" th:text="${post.getPostTitle()}"></a></td>
-      <td th:text="${post.getDatePosted()}"></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+<body style="background: #13090c">
+<a class="btn-warning" th:href="@{/submit}">Submit new post</a>
+<h2 class="text-center">Trending posts</h2>
+<table class="container-fluid">
+  <tbody>
+  <tr th:each="post : ${postList}">
+    <td th:text="${post.postScore}"></td>
+    <td><a th:href="@{${post.getId()} + '/upvote'}">+</a></td>
+    <td><a th:href="@{${post.getId()} + '/downvote'}">-</a></td>
+    <td><a th:href="${post.getPostContent()}" th:text="${post.getPostTitle()}"></a></td>
+    <td th:text="${post.getDatePosted()}"></td>
+  </tr>
+  </tbody>
+</table>
 <br>
-<ul class="pager">
-  <li><a th:href="@{'/' + ${page - 1}}">Previous</a></li>
-  <li><p th:text="${page}"></p></li>
-  <li><a th:href="@{'/' + ${page + 1}}">Next</a></li>
+<ul class="pagination">
+  <li class="page-item"><a class="page-link" th:href="@{'/' + ${page - 1}}">Previous</a></li>
+  <li class="page-item"><p class="page-link" th:text="${page}"></p></li>
+  <li class="page-item"><a class="page-link" th:href="@{'/' + ${page + 1}}">Next</a></li>
 </ul>
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>
